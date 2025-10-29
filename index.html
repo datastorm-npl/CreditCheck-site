@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CreditCheck – Sistem Intern</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="navbar" id="navbar">
+    <div class="logo">CreditCheck<span class="sub"> Admin</span></div>
+    <nav id="menu">
+      <button data-key="dashboard" type="button"></button>
+      <button data-key="form" type="button"></button>
+      <button data-key="contact" type="button"></button>
+    </nav>
+    <div id="language-switch">
+      <select id="language-selector" onchange="setLanguage(this.value)">
+        <option value="ro">RO</option>
+        <option value="en">EN</option>
+        <option value="ru">RU</option>
+      </select>
+    </div>
+  </header>
+
+  <section id="dashboard" class="fade">
+    <div class="content home-content">
+      <h1 id="welcome-text"></h1><span class="cursor">|</span>
+    </div>
+  </section>
+
+  <section id="form" class="fade">
+    <div class="content">
+      <h2 id="form-title"></h2>
+      
+      <div class="info-banner" id="info-banner"></div>
+      
+      <form id="loanForm">
+        <div class="section">
+          <h2 class="section-title" id="section-client">Informații Client</h2>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="segment"><span id="label-segment">Segment Client</span> <span class="required">*</span></label>
+              <select id="segment" name="segment" required>
+                <option value="" id="opt-select-segment">Selectați segmentul</option>
+                <option value="Retail" id="opt-retail">Retail</option>
+                <option value="Micro" id="opt-micro">Micro</option>
+                <option value="SME" id="opt-sme">IMM (Small and Medium Enterprise)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="region"><span id="label-region">Regiunea</span> <span class="required">*</span></label>
+              <select id="region" name="region" required>
+                <option value="" id="opt-select-region">Selectați regiunea</option>
+                <option value="Chișinău">Chișinău</option>
+                <option value="Bălți">Bălți</option>
+                <option value="UTA Găgăuzia">UTA Găgăuzia</option>
+                <option value="Anenii Noi">Anenii Noi</option>
+                <option value="Basarabeasca">Basarabeasca</option>
+                <option value="Briceni">Briceni</option>
+                <option value="Cahul">Cahul</option>
+                <option value="Cantemir">Cantemir</option>
+                <option value="Cimișlia">Cimișlia</option>
+                <option value="Criuleni">Criuleni</option>
+                <option value="Călărași">Călărași</option>
+                <option value="Căușeni">Căușeni</option>
+                <option value="Dondușeni">Dondușeni</option>
+                <option value="Drochia">Drochia</option>
+                <option value="Dubăsari">Dubăsari</option>
+                <option value="Edineț">Edineț</option>
+                <option value="Florești">Florești</option>
+                <option value="Fălești">Fălești</option>
+                <option value="Glodeni">Glodeni</option>
+                <option value="Hîncești">Hîncești</option>
+                <option value="Ialoveni">Ialoveni</option>
+                <option value="Leova">Leova</option>
+                <option value="Nisporeni">Nisporeni</option>
+                <option value="Ocnița">Ocnița</option>
+                <option value="Orhei">Orhei</option>
+                <option value="Rezina">Rezina</option>
+                <option value="Rîșcani">Rîșcani</option>
+                <option value="Soroca">Soroca</option>
+                <option value="Strășeni">Strășeni</option>
+                <option value="Sîngerei">Sîngerei</option>
+                <option value="Taraclia">Taraclia</option>
+                <option value="Telenești">Telenești</option>
+                <option value="Ungheni">Ungheni</option>
+                <option value="Șoldănești">Șoldănești</option>
+                <option value="Ștefan Vodă">Ștefan Vodă</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label><span id="label-urban">Tip Reședință</span> <span class="required">*</span></label>
+              <div class="checkbox-group">
+                <input type="checkbox" id="urban" name="urban" value="1">
+                <label for="urban" id="label-urban-check">Urban (bifați dacă client din zona urbană)</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="employer_sector"><span id="label-employer">Sector de Angajare</span> <span class="required">*</span></label>
+              <select id="employer_sector" name="employer_sector" required>
+                <option value="" id="opt-select-employer">Selectați sectorul</option>
+                <option value="Public" id="opt-public">Public</option>
+                <option value="Private" id="opt-private">Privat</option>
+                <option value="Agriculture" id="opt-agriculture">Agricultură</option>
+                <option value="Trade" id="opt-trade">Comerț</option>
+                <option value="Construction" id="opt-construction">Construcții</option>
+                <option value="IT" id="opt-it">IT</option>
+                <option value="Services" id="opt-services">Servicii</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title" id="section-loan">Detalii Împrumut</h2>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="loan_type"><span id="label-loan-type">Tip Credit</span> <span class="required">*</span></label>
+              <select id="loan_type" name="loan_type" required>
+                <option value="" id="opt-select-loan">Selectați tipul</option>
+                <option value="Consumer" id="opt-consumer">Consum</option>
+                <option value="Mortgage" id="opt-mortgage">Ipotecar</option>
+                <option value="Auto" id="opt-auto">Auto</option>
+                <option value="SME Working Capital" id="opt-sme-wc">Capital de Lucru IMM</option>
+                <option value="SME Investment" id="opt-sme-inv">Investiții IMM</option>
+                <option value="Agri Seasonal" id="opt-agri">Agricol Sezonier</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="currency"><span id="label-currency">Moneda</span> <span class="required">*</span></label>
+              <select id="currency" name="currency" required>
+                <option value="" id="opt-select-currency">Selectați moneda</option>
+                <option value="MDL" id="opt-mdl">MDL (Leu Moldovenesc)</option>
+                <option value="EUR" id="opt-eur">EUR (Euro)</option>
+                <option value="USD" id="opt-usd">USD (Dolar American)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="loan_amount_ccy"><span id="label-loan-amount">Suma Împrumutului</span> <span class="required">*</span></label>
+              <input type="number" id="loan_amount_ccy" name="loan_amount_ccy" 
+                     step="0.001" required
+                     placeholder="Ex: 50000">
+              <span class="help-text" id="help-loan-amount">În moneda selectată</span>
+            </div>
+
+            <div class="form-group">
+              <label for="loan_amount_mdl"><span id="label-loan-amount-mdl">Suma Împrumutului (MDL)</span> <span class="required">*</span></label>
+              <input type="number" id="loan_amount_mdl" name="loan_amount_mdl" 
+                     step="0.001" required
+                     placeholder="Ex: 50000">
+              <span class="help-text" id="help-loan-amount-mdl">Suma în MDL</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tenor_months"><span id="label-tenor">Perioada (luni)</span> <span class="required">*</span></label>
+              <input type="number" id="tenor_months" name="tenor_months" 
+                     required
+                     placeholder="Ex: 24">
+              <span class="help-text" id="help-tenor">Perioada în luni</span>
+            </div>
+
+            <div class="form-group">
+              <label for="interest_rate_annual"><span id="label-interest">Rata Dobânzii Anuală (%)</span> <span class="required">*</span></label>
+              <input type="number" id="interest_rate_annual" name="interest_rate_annual" 
+                     step="0.001" required
+                     placeholder="Ex: 8.5">
+              <span class="help-text" id="help-interest">Rata anuală în procente</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="origination_date"><span id="label-orig-date">Data Acordării</span> <span class="required">*</span></label>
+              <input type="date" id="origination_date" name="origination_date" required>
+            </div>
+
+            <div class="form-group">
+              <label for="inflation_at_origination"><span id="label-inflation">Inflație la Acordare (%)</span> <span class="required">*</span></label>
+              <input type="number" id="inflation_at_origination" name="inflation_at_origination" 
+                     step="0.001" required
+                     placeholder="Ex: 7.5">
+              <span class="help-text" id="help-inflation">Rata inflației la momentul acordării</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="policy_rate_at_origination"><span id="label-policy-rate">Rata Politicii Monetare (%)</span> <span class="required">*</span></label>
+              <input type="number" id="policy_rate_at_origination" name="policy_rate_at_origination" 
+                     step="0.001" required
+                     placeholder="Ex: 6.5">
+              <span class="help-text" id="help-policy-rate">Rata BNM la momentul acordării</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title" id="section-collateral">Garanții</h2>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="collateral_type"><span id="label-collateral-type">Tip Garanție</span></label>
+              <select id="collateral_type" name="collateral_type">
+                <option value="" id="opt-no-collateral">Fără garanție</option>
+                <option value="Guarantor" id="opt-guarantor-coll">Garanție Personală</option>
+                <option value="Car" id="opt-car">Autovehicul</option>
+                <option value="RealEstate" id="opt-realestate">Imobil</option>
+                <option value="Equipment" id="opt-equipment">Echipament</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="ltv"><span id="label-ltv">Raport LTV (Loan-to-Value)</span> <span class="required">*</span></label>
+              <input type="number" id="ltv" name="ltv" 
+                     step="0.001" required
+                     placeholder="Ex: 0.75">
+              <span class="help-text" id="help-ltv">Raportul împrumut/valoare (0 = fără garanție)</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label><span id="label-guarantor">Garant Prezent</span></label>
+              <div class="checkbox-group">
+                <input type="checkbox" id="guarantor_present" name="guarantor_present" value="1">
+                <label for="guarantor_present" id="label-guarantor-check">Client are garant</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title" id="section-financial">Informații Financiare</h2>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="monthly_income_mdl"><span id="label-income">Venit Lunar (MDL)</span> <span class="required">*</span></label>
+              <input type="number" id="monthly_income_mdl" name="monthly_income_mdl" 
+                     step="0.001" required
+                     placeholder="Ex: 8000">
+              <span class="help-text" id="help-income">Venitul lunar în MDL</span>
+            </div>
+
+            <div class="form-group">
+              <label for="remittances_share_income"><span id="label-remittances">Ponderea Remitențelor</span> <span class="required">*</span></label>
+              <input type="number" id="remittances_share_income" name="remittances_share_income" 
+                     step="0.001" required
+                     placeholder="Ex: 0.25">
+              <span class="help-text" id="help-remittances">Între 0 și 1 (25% = 0.25)</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dti"><span id="label-dti">DTI (Debt-to-Income)</span> <span class="required">*</span></label>
+              <input type="number" id="dti" name="dti" 
+                     step="0.0001" required
+                     placeholder="Ex: 0.35">
+              <span class="help-text" id="help-dti">Raport datorii/venit</span>
+            </div>
+
+            <div class="form-group">
+              <label for="pti"><span id="label-pti">PTI (Payment-to-Income)</span> <span class="required">*</span></label>
+              <input type="number" id="pti" name="pti" 
+                     step="0.0001" required
+                     placeholder="Ex: 0.30">
+              <span class="help-text" id="help-pti">Raport plată/venit</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label><span id="label-salary">Proiect Salarial</span></label>
+              <div class="checkbox-group">
+                <input type="checkbox" id="salary_project" name="salary_project" value="1">
+                <label for="salary_project" id="label-salary-check">Salariul este plătit prin bancă</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title" id="section-history">Istoric Credit</h2>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="num_loans_bureau"><span id="label-num-loans">Număr Împrumuturi Anterioare</span> <span class="required">*</span></label>
+              <input type="number" id="num_loans_bureau" name="num_loans_bureau" 
+                     required
+                     placeholder="Ex: 2">
+              <span class="help-text" id="help-num-loans">Număr de împrumuturi anterioare</span>
+            </div>
+
+            <div class="form-group">
+              <label for="credit_bureau_score"><span id="label-credit-score">Scor de Credit</span> <span class="required">*</span></label>
+              <input type="number" id="credit_bureau_score" name="credit_bureau_score" 
+                     required
+                     placeholder="Ex: 680">
+              <span class="help-text" id="help-credit-score">Scor de credit (mai mare = risc mai mic)</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label><span id="label-arrears">Restanțe Anterioare</span></label>
+              <div class="checkbox-group">
+                <input type="checkbox" id="previous_dpd_30" name="previous_dpd_30" value="1">
+                <label for="previous_dpd_30" id="label-dpd30">Restanță ≥30 zile</label>
+              </div>
+              <div class="checkbox-group" style="margin-top: 10px;">
+                <input type="checkbox" id="previous_dpd_60" name="previous_dpd_60" value="1">
+                <label for="previous_dpd_60" id="label-dpd60">Restanță ≥60 zile</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button type="reset" class="btn-secondary" id="btn-reset">Resetare</button>
+          <button type="submit" class="btn-primary" id="btn-submit">Trimite Cererea</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="contact" class="fade">
+    <div class="content">
+      <h2 id="contact-title"></h2>
+      <p id="contact-email"></p>
+      <p id="contact-risk"></p>
+      <p id="contact-it"></p>
+    </div>
+  </section>
+
+  <footer>
+    <p id="footer-text"></p>
+  </footer>
+</body>
+</html>
